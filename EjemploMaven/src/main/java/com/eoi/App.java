@@ -16,5 +16,6 @@ public class App {
         // System.out.println(vacia);
         System.out.println("Nombre de vacia: " + vacia.getNombre());
         System.out.println("Apellido de vacia: " + vacia.getApellido());
+        // Fin del ejemplo
     }
 }
