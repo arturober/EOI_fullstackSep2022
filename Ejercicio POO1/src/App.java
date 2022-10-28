@@ -32,8 +32,26 @@ public class App {
         }
     }
 
+    public static void apartado4() {
+        Equipo e = new Equipo();
+
+        e.addJugador(new Jugador("Jose", 23, 25000));
+        e.addJugador(new Jugador("Antonio", 35, 44500));
+        e.addJugador(new Jugador("Fran", 19, 21000));
+        e.addJugador(new Jugador("Paco", 29, 39000));
+
+        e.deleteJugador(0);
+
+        for(int i = 0; i < e.getNumJugadores(); i++) {
+            System.out.println(e.getJugador(i));
+        }
+
+        System.out.println("Total sueldos: " + e.totalSueldos());
+    }
+
     public static void main(String[] args) throws Exception {
         // apartado1();
-        apartado2();
+        // apartado2();
+        apartado4();
     }
 }
