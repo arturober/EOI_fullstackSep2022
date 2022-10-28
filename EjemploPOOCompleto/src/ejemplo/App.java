@@ -1,11 +1,16 @@
 package ejemplo;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class App {
-    public static void cambiaProducto(Producto producto) {
+    public static void cambiaProducto(Producto producto) throws IOException {
         producto.setNombre("Mesa");
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args)  {
         Producto p = new Producto("Silla", 100);
         Producto p2 = new Producto(p.getNombre(), p.getPrecio());
 
