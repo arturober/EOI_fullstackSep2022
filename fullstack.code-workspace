@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "jdbcejemplo1"
+		},
+		{
+			"path": "EjemploMaven"
+		},
+		{
+			"path": "EjemploPOOCompleto"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic"
+	}
+}
