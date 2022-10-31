@@ -42,10 +42,19 @@ public class App {
         }
     }
 
+    public static void ejemplo5() {
+        Mamifero m = new Mamifero("Leon", 300, true);
+        m.hablar();
+
+        Persona p = new Persona("Pepe");
+        p.hablar();
+    }
+
     public static void main(String[] args) throws Exception {
         // ejemplo1();
         // ejemplo2();
         // ejemplo3();
-        ejemplo4();
+        // ejemplo4();
+        ejemplo5();
     }
 }

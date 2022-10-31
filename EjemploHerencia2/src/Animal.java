@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public abstract class Animal extends Object {
+public abstract class Animal implements IHablador {
     private String nombre;
     private double peso;
     
@@ -37,6 +37,11 @@ public abstract class Animal extends Object {
      * @return Devuelve el tipo de animal
      */
     public abstract String tipoAnimal();
+
+    @Override
+    public void hablar() {
+        System.out.println(nombre + ": (emite un extraño sonido)");
+    }
 
     @Override
     public String toString() {
