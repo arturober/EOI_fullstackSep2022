@@ -28,4 +28,9 @@ public class Ave extends Animal {
         setPeso(getPeso() * 1.05);
         System.out.printf("Pio pio. He comido y ahora peso %.2f kilos\n", getPeso());
     }
+
+    @Override
+    public String tipoAnimal() {
+        return "Ave";
+    }
 }
