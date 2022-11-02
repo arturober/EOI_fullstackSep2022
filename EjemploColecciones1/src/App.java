@@ -75,6 +75,8 @@ public class App {
         // Collections.sort(numeros, Comparator.reverseOrder());
         numeros.sort(Comparator.reverseOrder());
         System.out.println(numeros);
+        Collections.shuffle(numeros); // Desordena lista (random)
+        System.out.println(numeros);
     }
 
     public static void main(String[] args) throws Exception {
