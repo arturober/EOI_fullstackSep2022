@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class App {
     /**
@@ -78,6 +79,8 @@ public class App {
         Collections.shuffle(numeros); // Desordena lista (random)
         System.out.println(numeros);
     }
+
+
 
     public static void main(String[] args) throws Exception {
         // ejemplo1();
