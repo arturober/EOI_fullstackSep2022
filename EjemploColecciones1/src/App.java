@@ -146,6 +146,39 @@ public class App {
         // personas.forEach(System.out::println); // Igual que lo anterior
     }
 
+    /**
+     * Crear una lista de nombres
+       Convertir los nombres a mayúsculas (replaceAll)
+       Borrar los nombres que empiezan por "A" (removeIf)
+       Recorre la lista con un forEach y muestra los nombres
+    */
+    public static void ejercicio() {
+        List<String> nombres = new ArrayList<>(
+            List.of("Antonio", "Luisa", "Arnold", "Martín", "Ana", "Marcos")
+        );
+
+        nombres.replaceAll(nombre -> nombre.toUpperCase());
+        nombres.removeIf(nombre -> nombre.startsWith("A"));
+        nombres.forEach(nombre -> System.out.println(nombre));
+    }
+
+    /**
+     * Lo mismo que el ejercicio anterior pero con personas
+     */
+    public static void ejercicio2() {
+        List<Persona> personas = new ArrayList<>();
+        personas.add(new Persona(24, "Juan"));
+        personas.add(new Persona(19, "Ana"));
+        personas.add(new Persona(43, "Marta"));
+        personas.add(new Persona(33, "Arnold"));
+        personas.add(new Persona(17, "Paula"));
+
+        // personas.forEach(p -> p.setNombre(p.getNombre().toUpperCase()));
+        personas.replaceAll(p -> new Persona(p.getEdad(), p.getNombre().toUpperCase()));
+        personas.removeIf(p -> p.getNombre().startsWith("A"));
+        personas.forEach(p -> System.out.println(p));
+    }
+
     public static void main(String[] args) throws Exception {
         // ejemplo1();
         // ejemplo2();
@@ -154,6 +187,8 @@ public class App {
         // ejemplo5();
         // ejemplo6();
         // ejemplo7();
-        ejemplo8();
+        // ejemplo8();
+        // ejercicio();
+        ejercicio2();
     }
 }
