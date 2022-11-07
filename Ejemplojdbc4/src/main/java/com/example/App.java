@@ -50,23 +50,30 @@ public class App {
     public static void insertCategoriaProducto(String nombreCat, String ref, String nombreProd, double precio) {
         try (Connection conn = DriverManager.getConnection(PRODUCT_MANAGER, USER, PASS)) {
             conn.setAutoCommit(false);
-            // INSERT CATEGORIA
-            PreparedStatement stCat = conn.prepareStatement("INSERT INTO category (name) VALUES (?)",
-                    Statement.RETURN_GENERATED_KEYS);
-            stCat.setString(1, nombreCat);
-            stCat.executeUpdate();
-            ResultSet rs = stCat.getGeneratedKeys();
-            rs.first();
-            int idCat = rs.getInt(1);
+            try {
+                // INSERT CATEGORIA
+                PreparedStatement stCat = conn.prepareStatement("INSERT INTO category (name) VALUES (?)",
+                        Statement.RETURN_GENERATED_KEYS);
+                stCat.setString(1, nombreCat);
+                stCat.executeUpdate();
+                ResultSet rs = stCat.getGeneratedKeys();
+                rs.first();
+                int idCat = rs.getInt(1);
 
-            // INSERT PRODUCTO
-            PreparedStatement stProd = conn.prepareStatement("INSERT INTO product (reference, name, price, category) VALUES (?, ?, ?, ?)");
-            stProd.setString(1, ref);
-            stProd.setString(2, nombreProd);
-            stProd.setDouble(3, precio);
-            stProd.setInt(4, idCat);
-            stProd.executeUpdate();
-            conn.commit();
+                // INSERT PRODUCTO
+                PreparedStatement stProd = conn
+                        .prepareStatement("INSERT INTO product (reference, name, price, category) VALUES (?, ?, ?, ?)");
+                stProd.setString(1, ref);
+                stProd.setString(2, nombreProd);
+                stProd.setDouble(3, precio);
+                stProd.setInt(4, idCat);
+                stProd.executeUpdate();
+                conn.commit();
+            } catch (SQLException ex) {
+                conn.rollback();
+                System.err.println(ex.getMessage());
+            }
+            conn.setAutoCommit(true);
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }

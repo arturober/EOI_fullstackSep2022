@@ -20,27 +20,33 @@ public class App {
     public static void transferirSaldo(int numOrigen, int numDestino, double cantidad) {
         try (Connection conn = DriverManager.getConnection(BANCO, USER, PASS)) {
             conn.setAutoCommit(false);
-            PreparedStatement stOrigen = conn.prepareStatement("UPDATE cuenta SET saldo = saldo - ? WHERE numero = ?");
-            stOrigen.setDouble(1, cantidad);
-            stOrigen.setInt(2, numOrigen);
-            int filasOrigen = stOrigen.executeUpdate();
+            try {
+                PreparedStatement stOrigen = conn.prepareStatement("UPDATE cuenta SET saldo = saldo - ? WHERE numero = ?");
+                stOrigen.setDouble(1, cantidad);
+                stOrigen.setInt(2, numOrigen);
+                int filasOrigen = stOrigen.executeUpdate();
 
-            if(filasOrigen == 1) {
-                PreparedStatement stDest = conn.prepareStatement("UPDATE cuenta SET saldo = saldo + ? WHERE numero = ?");
-                stDest.setDouble(1, cantidad);
-                stDest.setInt(2, numDestino);
-                int filasDest = stDest.executeUpdate();
+                if(filasOrigen == 1) {
+                    PreparedStatement stDest = conn.prepareStatement("UPDATE cuenta SET saldo = saldo + ? WHERE numero = ?");
+                    stDest.setDouble(1, cantidad);
+                    stDest.setInt(2, numDestino);
+                    int filasDest = stDest.executeUpdate();
 
-                if(filasDest == 1) {
-                    conn.commit(); // Confirmar transacción
+                    if(filasDest == 1) {
+                        conn.commit(); // Confirmar transacción
+                    } else {
+                        System.err.println("Cuenta destino no válida");
+                        conn.rollback(); // Cancelar. No es necesario al cerrar la conexión en el try. Si no se cerrara, sí es necesario
+                    }
                 } else {
-                    System.err.println("Cuenta destino no válida");
-                    conn.rollback(); // Cancelar. No es necesario al cerrar la conexión en el try. Si no se cerrara, sí es necesario
+                    System.err.println("Cuenta origen no válida");
+                    conn.rollback();
                 }
-            } else {
-                System.err.println("Cuenta origen no válida");
+            } catch(SQLException e) {
                 conn.rollback();
+                e.printStackTrace();
             }
+            conn.setAutoCommit(true);
         } catch (SQLException e) {
             e.printStackTrace();
         }
