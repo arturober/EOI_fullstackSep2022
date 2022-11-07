@@ -31,18 +31,49 @@ public class App {
     }
 
     public static boolean insertDepartamento(int num, String nombre) {
-        return false;
+        try (Connection conn = DriverManager.getConnection(CADENA_CONEXION, USER, PASS)) {
+            PreparedStatement st = conn.prepareStatement("INSERT INTO departamentos VALUES (?, ?)");
+            st.setInt(1, num);
+            st.setString(2, nombre);
+            int filas = st.executeUpdate();
+            return filas > 0;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public static boolean deleteDepartamento(int num) {
+        try (Connection conn = DriverManager.getConnection(CADENA_CONEXION, USER, PASS)) {
+            PreparedStatement st = conn.prepareStatement("DELETE FROM departamentos WHERE deptno = ?");
+            st.setInt(1, num);
+            int filas = st.executeUpdate();
+            return filas > 0;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            return false;
+        }
     }
 
     public static void main(String[] args) {
+        System.out.println("Listado de departamentos actuales:");
+        mostrarDepartamentos();
+
+        System.out.println("---------- Nuevo departamento ----------");
         Scanner sc = new Scanner(System.in);
         System.out.print("Número de departamento: ");
         int num = Integer.parseInt(sc.nextLine());
         System.out.print("Nombre departamento: ");
         String nombre = sc.nextLine();
-        // apartado1();
         insertDepartamento(num, nombre);
+        System.out.println("Departamento insertado correctamente...");
+
         mostrarDepartamentos();
+        System.out.println("A continuación voy a borrarlo. Presione enter para continuar...");
+        sc.nextLine();
         
+        deleteDepartamento(num);
+        System.out.println("Departamento borrado...");
+        mostrarDepartamentos();
     }
 }
