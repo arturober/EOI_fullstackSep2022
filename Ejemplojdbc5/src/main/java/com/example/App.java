@@ -34,9 +34,11 @@ public class App {
                 if(filasDest == 1) {
                     conn.commit(); // Confirmar transacción
                 } else {
+                    System.err.println("Cuenta destino no válida");
                     conn.rollback(); // Cancelar. No es necesario al cerrar la conexión en el try. Si no se cerrara, sí es necesario
                 }
             } else {
+                System.err.println("Cuenta origen no válida");
                 conn.rollback();
             }
         } catch (SQLException e) {
@@ -45,6 +47,6 @@ public class App {
     }
 
     public static void main(String[] args) {
-        transferirSaldo(1001, 2003, 500);
+        transferirSaldo(1001, 2002, 500);
     }
 }
