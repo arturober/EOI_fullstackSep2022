@@ -54,6 +54,7 @@ public class App {
             System.out.print("\nCategoría a borrar: ");
             int id = sc.nextInt();
             borrarCategoria(conn, id);
+            System.out.println("Categoría " + id + " borrada");
             // Muchas más operaciones
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
