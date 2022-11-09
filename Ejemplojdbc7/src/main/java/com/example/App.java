@@ -33,16 +33,25 @@ public class App {
     }
 
     public static void actualizaCategoria() {
-        // Mostrar todas las categorías
-        // El usuario elige una id de categoría a modificar (opcional: comprobar que la categoría existe)
-        // Se le pide un nuevo nombre
-        // Se modifica
+        mostrarCategorias();
+        System.out.print("Categoría a modificar: ");
+        int idCat = Integer.parseInt(System.console().readLine());
+
+        Category c = catDao.findById(idCat);
+        if(c != null) {
+            System.out.print("Dime nuevo nombre: ");
+            c.setName(System.console().readLine());
+            catDao.update(c);
+        } else {
+            System.err.println("Categoría no existe");
+        }
     }
 
     public static void borraCategoria() {
-        // Mostrar todas las categorías
-        // El usuario elige una id de categoría a borrar 
-        // se borra
+        mostrarCategorias();
+        System.out.print("Categoría a borrar: ");
+        int idCat = Integer.parseInt(System.console().readLine());
+        catDao.delete(idCat);
     }
 
     public static void showMenu() {
@@ -66,6 +75,8 @@ public class App {
             switch(opcion) {
                 case 1 -> mostrarCategorias();
                 case 2 -> insertarCategoria();
+                case 3 -> actualizaCategoria();
+                case 4 -> borraCategoria();
             }
         } while(opcion != 0);
     }
