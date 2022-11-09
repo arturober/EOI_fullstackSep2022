@@ -1,6 +1,7 @@
 package com.example.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,8 +36,18 @@ public class CategoryDAOMariaDB implements CategoryDAO {
 
     @Override
     public Category findById(int id) {
-        // TODO Auto-generated method stub
-        return null;
+        Category cat = null;
+        try(Connection conn = pcon.getConnection()) {
+            PreparedStatement st = conn.prepareStatement("SELECT * FROM category WHERE id = ?");
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if(rs.first()) {
+                cat = new Category(id, rs.getString("name"));
+            }
+        } catch(SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return cat;
     }
     
 }

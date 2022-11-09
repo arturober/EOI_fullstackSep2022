@@ -1,10 +1,6 @@
 package com.example;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import javax.sql.PooledConnection;
@@ -27,10 +23,17 @@ public class App {
         pcon = pool.getPooledConnection();
 
         CategoryDAO catDao = new CategoryDAOMariaDB(pcon);
+
         List<Category> cats = catDao.findAll();
         cats.forEach(c -> System.out.println(c));
 
+        System.out.println("Obtener la categoría 1");
         Category c1 = catDao.findById(1);
         System.out.println(c1);
+
+        System.out.println("Obtener categoría que no existe");
+        Category c99 = catDao.findById(99);
+        System.out.println(c99);
+
     }
 }
