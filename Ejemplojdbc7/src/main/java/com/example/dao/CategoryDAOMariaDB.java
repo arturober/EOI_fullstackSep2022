@@ -32,5 +32,11 @@ public class CategoryDAOMariaDB implements CategoryDAO {
         }
         return cats;
     }
+
+    @Override
+    public Category findById(int id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
     
 }

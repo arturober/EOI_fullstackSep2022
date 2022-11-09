@@ -10,4 +10,10 @@ public interface CategoryDAO {
      * @return Lista de objetos Category
      */
     List<Category> findAll();
+
+    /**
+     * Busca una categoría a partir de su id
+     * @return El objeto categoría encontrado o null si no lo encuentra
+     */
+    Category findById(int id);
 }

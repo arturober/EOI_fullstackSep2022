@@ -29,5 +29,8 @@ public class App {
         CategoryDAO catDao = new CategoryDAOMariaDB(pcon);
         List<Category> cats = catDao.findAll();
         cats.forEach(c -> System.out.println(c));
+
+        Category c1 = catDao.findById(1);
+        System.out.println(c1);
     }
 }
