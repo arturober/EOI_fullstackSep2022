@@ -10,7 +10,10 @@ import org.mariadb.jdbc.MariaDbPoolDataSource;
 
 import com.example.dao.CategoryDAO;
 import com.example.dao.CategoryDAOMariaDB;
+import com.example.dao.ProductDAO;
+import com.example.dao.ProductDAOMariaDB;
 import com.example.entidades.Category;
+import com.example.entidades.Product;
 
 /**
  * Ejemplo 3 de JDBC pero con Pool de conexiones
@@ -18,6 +21,7 @@ import com.example.entidades.Category;
 public class App {
     private static PooledConnection pcon;
     private static CategoryDAO catDao;
+    private static ProductDAO prodDao;
 
     public static void mostrarCategorias() {
         List<Category> cats = catDao.findAll();
@@ -54,6 +58,21 @@ public class App {
         catDao.delete(idCat);
     }
 
+    public static void mostrarProductos() {
+        mostrarCategorias();
+        System.out.print("Elige una categoría: ");
+        int idCat = Integer.parseInt(System.console().readLine());
+
+        List<Product> prods = prodDao.findByCategory(idCat);
+        prods.forEach(p -> System.out.println(p));
+    }
+
+    public static void insertarProducto() {
+        // Mostrar y seleccionar categoría
+        // Pedir resto de datos (reference, name, price)
+        // Mostrar producto añadido
+    }
+
     public static void showMenu() {
         int opcion;
         do {
@@ -62,6 +81,8 @@ public class App {
             System.out.println("2. Añadir categoría");
             System.out.println("3. Modificar categoría");
             System.out.println("4. Borrar categoría");
+            System.out.println("5. Mostrar productos");
+            System.out.println("6. Añadir producto");
             System.out.println("0. Salir");
             
             System.out.print("Elige una opción: ");
@@ -77,6 +98,8 @@ public class App {
                 case 2 -> insertarCategoria();
                 case 3 -> actualizaCategoria();
                 case 4 -> borraCategoria();
+                case 5 -> mostrarProductos();
+                case 6 -> insertarProducto();
             }
         } while(opcion != 0);
     }
@@ -87,6 +110,7 @@ public class App {
         pcon = pool.getPooledConnection();
 
         catDao = new CategoryDAOMariaDB(pcon);
+        prodDao = new ProductDAOMariaDB(pcon);
 
         showMenu();
 
