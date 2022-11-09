@@ -35,5 +35,14 @@ public class App {
         Category c99 = catDao.findById(99);
         System.out.println(c99);
 
+        // Category c = new Category(0, "Nueva");
+        // Category cInsert = catDao.insert(c);
+        // System.out.println(cInsert);
+
+        // Category c25 = catDao.findById(25);
+        // c25.setName("Nombre cambiado");
+        // catDao.update(c25);
+
+        catDao.delete(25);
     }
 }
