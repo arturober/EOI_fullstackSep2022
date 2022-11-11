@@ -68,9 +68,27 @@ public class App {
     }
 
     public static void insertarProducto() {
-        // Mostrar y seleccionar categoría
-        // Pedir resto de datos (reference, name, price)
-        // Mostrar producto añadido
+        mostrarCategorias();
+        System.out.print("Elige una categoría: ");
+        int idCat = Integer.parseInt(System.console().readLine());
+
+        System.out.print("Referencia: ");
+        String ref = System.console().readLine();
+        System.out.print("Nombre: ");
+        String nombre = System.console().readLine();
+        System.out.print("Precio: ");
+        double precio = Double.parseDouble(System.console().readLine());
+        
+        Product p = new Product(0, ref, nombre, precio, idCat);
+        Product pInsert = prodDao.insert(p);
+        System.out.println("Producto insertado: " + pInsert);
+    }
+
+    public static void borrarProducto() {
+        mostrarProductos();
+        System.out.print("Producto a borrar: ");
+        int idProd = Integer.parseInt(System.console().readLine());
+        prodDao.delete(idProd);
     }
 
     public static void showMenu() {
@@ -83,6 +101,7 @@ public class App {
             System.out.println("4. Borrar categoría");
             System.out.println("5. Mostrar productos");
             System.out.println("6. Añadir producto");
+            System.out.println("7. Borrar producto");
             System.out.println("0. Salir");
             
             System.out.print("Elige una opción: ");
@@ -100,6 +119,7 @@ public class App {
                 case 4 -> borraCategoria();
                 case 5 -> mostrarProductos();
                 case 6 -> insertarProducto();
+                case 7 -> borrarProducto();
             }
         } while(opcion != 0);
     }

@@ -8,4 +8,6 @@ public interface ProductDAO {
     List<Product> findByCategory(int idCat);
 
     Product insert(Product p);
+
+    boolean delete(int idProd);
 }
