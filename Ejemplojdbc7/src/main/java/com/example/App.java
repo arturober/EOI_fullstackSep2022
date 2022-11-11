@@ -126,7 +126,7 @@ public class App {
 
     public static void main( String[] args ) throws SQLException {
         // Creamos Pool de conexiones MariaDB
-        MariaDbPoolDataSource pool = new MariaDbPoolDataSource("jdbc:mariadb://localhost:3306/product-manager?user=root&maxPoolSize=10");
+        MariaDbPoolDataSource pool = new MariaDbPoolDataSource("jdbc:mariadb://localhost:3306/product-manager?user=root");
         pcon = pool.getPooledConnection();
 
         catDao = new CategoryDAOMariaDB(pcon);
