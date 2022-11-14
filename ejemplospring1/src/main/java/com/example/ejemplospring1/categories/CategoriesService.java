@@ -17,6 +17,16 @@ public class CategoriesService {
     }
 
     public Category getCategory(int id) {
-        return catRepository.findById(id).orElse(null);
+        return catRepository.findById(id).get();
+    }
+
+    public Category insert(Category c) {
+        c.setId(0); // Por si acaso nos envían una id (haría un update en lugar de insert)
+        return catRepository.save(c);
+    }
+
+    public Category update(Category c, int id) {
+        c.setId(id); // Al tener una id hace un update en lugar de un insert
+        return catRepository.save(c);
     }
 }
