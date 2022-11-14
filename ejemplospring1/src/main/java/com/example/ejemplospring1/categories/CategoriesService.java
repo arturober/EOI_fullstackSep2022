@@ -29,4 +29,8 @@ public class CategoriesService {
         c.setId(id); // Al tener una id hace un update en lugar de un insert
         return catRepository.save(c);
     }
+
+    public void delete(int id) {
+        catRepository.deleteById(id);
+    }
 }

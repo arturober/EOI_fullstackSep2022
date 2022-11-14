@@ -3,9 +3,12 @@ package com.example.ejemplospring1.categories;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.dao.IncorrectUpdateSemanticsDataAccessException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.data.relational.core.conversion.DbActionExecutionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +37,7 @@ public class CategoriesController {
             Category c = catService.getCategory(id);
             return ResponseEntity.ok(c);
         } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); // 404 NOT FOUND
         }
     }
 
@@ -45,7 +48,18 @@ public class CategoriesController {
     }
 
     @PutMapping("/{id}")
-    public Category updateCategory(@RequestBody Category c, @PathVariable int id) {
-        return catService.update(c, id);
+    public ResponseEntity<Category> updateCategory(@RequestBody Category c, @PathVariable int id) {
+        try {
+            Category updated = catService.update(c, id);
+            return ResponseEntity.ok(updated);
+        } catch(DbActionExecutionException e) {
+            return ResponseEntity.notFound().build(); // 404 NOT FOUND
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCategory(@PathVariable int id) {
+        catService.delete(id);
     }
 }
