@@ -30,13 +30,8 @@ public class CategoriesController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getCategory(@PathVariable int id) {
-        try {
-            Category c = catService.getCategory(id);
-            return ResponseEntity.ok(c);
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build(); // 404 NOT FOUND
-        }
+    public Category getCategory(@PathVariable int id) {
+        return catService.getCategory(id);
     }
 
     @PostMapping
@@ -46,13 +41,8 @@ public class CategoriesController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> updateCategory(@RequestBody Category c, @PathVariable int id) {
-        try {
-            Category updated = catService.update(c, id);
-            return ResponseEntity.ok(updated);
-        } catch(DbActionExecutionException e) {
-            return ResponseEntity.notFound().build(); // 404 NOT FOUND
-        }
+    public Category updateCategory(@RequestBody Category c, @PathVariable int id) {
+        return catService.update(c, id);
     }
 
     @DeleteMapping("/{id}")
