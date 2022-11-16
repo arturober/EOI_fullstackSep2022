@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoriesRepository extends CrudRepository<Category, Integer> {
-    @Query("SELECT * FROM `category` WHERE name LIKE :name")
-    List<Category> getByName(String name);
+    // @Query("SELECT * FROM `category` WHERE name LIKE :name")
+    // List<Category> getByName(String name);
+
+    // Same as the above method!
+    List<Category> findByNameContaining(String name); 
+
 }

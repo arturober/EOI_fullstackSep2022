@@ -18,7 +18,8 @@ public class CategoriesService {
     }
 
     public List<Category> getCategoriesByName(String name) {
-        return catRepository.getByName("%" + name + "%");
+        // return catRepository.getByName("%" + name + "%");
+        return catRepository.findByNameContaining(name);
     }
 
     public Category getCategory(int id) {
