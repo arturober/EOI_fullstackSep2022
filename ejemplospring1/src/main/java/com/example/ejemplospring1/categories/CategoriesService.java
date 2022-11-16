@@ -14,8 +14,11 @@ public class CategoriesService {
     private final CategoriesRepository catRepository;
 
     public List<Category> getCategories() {
-        List<Category> cats = (List<Category>) catRepository.findAll();
-        return cats;
+        return (List<Category>) catRepository.findAll();
+    }
+
+    public List<Category> getCategoriesByName(String name) {
+        return catRepository.getByName("%" + name + "%");
     }
 
     public Category getCategory(int id) {

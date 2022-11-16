@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +26,12 @@ public class CategoriesController {
     private final CategoriesService catService;
 
     @GetMapping
-    public List<Category> getCategories() {
-        return catService.getCategories();
+    public List<Category> getCategories(@RequestParam(required = false) String name) {
+        if(name != null) {
+            return catService.getCategoriesByName(name);
+        } else {
+            return catService.getCategories();
+        }
     }
 
     @GetMapping("/{id}")
