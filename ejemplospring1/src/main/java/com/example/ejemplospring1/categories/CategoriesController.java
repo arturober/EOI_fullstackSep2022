@@ -3,8 +3,6 @@ package com.example.ejemplospring1.categories;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.springframework.dao.IncorrectUpdateSemanticsDataAccessException;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.relational.core.conversion.DbActionExecutionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
