@@ -177,7 +177,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/products?category=46",
+							"raw": "http://localhost:8080/products?category=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -189,7 +189,7 @@
 							"query": [
 								{
 									"key": "category",
-									"value": "46"
+									"value": "1"
 								}
 							]
 						}
@@ -253,7 +253,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"reference\": \"3111\",\r\n    \"name\": \"New product 24\",\r\n    \"price\": 555,\r\n    \"category\": 36\r\n}",
+							"raw": "{\r\n    \"reference\": \"3566\",\r\n    \"name\": \"New product 24\",\r\n    \"price\": 555,\r\n    \"idCategory\": 36\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
