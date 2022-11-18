@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.ejemplospring1.categories.proyecciones.CategoryWithoutProducts;
+import com.example.ejemplospring1.products.Product;
+import com.example.ejemplospring1.products.ProductsRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CategoriesService {
     private final CategoriesRepository catRepository;
-    private final ProductsRepository prodRepository;
 
     public List<CategoryWithoutProducts> getCategories() {
         return catRepository.findBy();
@@ -48,23 +49,4 @@ public class CategoriesService {
     public void delete(int id) {
         catRepository.deleteById(id);
     }
-
-    public List<Product> getProducts(int idCat) {
-        // Category c = getCategory(idCat);
-        // return new ArrayList<>(c.getProducts());
-        return prodRepository.findByCategory(idCat);
-    }
-
-    public Product insertProduct(Product p, int idCat) {
-        Category c = getCategory(idCat);
-        p.setCategory(idCat);
-        c.getProducts().add(p);
-        catRepository.save(c);
-        return p;
-    }
-
-    public void deleteProduct(int id) {
-        prodRepository.deleteById(id);
-    }
-    
 }

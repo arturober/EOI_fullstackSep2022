@@ -1,4 +1,4 @@
-package com.example.ejemplospring1.categories;
+package com.example.ejemplospring1.products;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;

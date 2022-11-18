@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ejemplospring1.categories.proyecciones.CategoryWithoutProducts;
+import com.example.ejemplospring1.products.Product;
+import com.example.ejemplospring1.products.ProductsService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CategoriesController {
     private final CategoriesService catService;
+    private final ProductsService productsService;
 
     @GetMapping
     public List<CategoryWithoutProducts> getCategories(@RequestParam(required = false) String name) {
@@ -60,20 +63,21 @@ public class CategoriesController {
 
     // Devuelve todos los productos de una categoría
     @GetMapping("/{idCat}/products")
-    public List<Product> insertProduct( @PathVariable int idCat) {
-        return catService.getProducts(idCat);
+    public List<Product> getProducts( @PathVariable int idCat) {
+        return productsService.getProducts(idCat);
     }
 
     // Inserta un producto en una categoría
     @PostMapping("/{idCat}/products")
     public Product insertProduct(@RequestBody Product p, @PathVariable int idCat) {
-        return catService.insertProduct(p, idCat);
+        p.setCategory(idCat);
+        return productsService.insertProduct(p);
     }
 
     // Borra un producto de una categoría
     @DeleteMapping("/{idCat}/products/{idProd}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProduct(@PathVariable int idProd) {
-        catService.deleteProduct(idProd);
+        productsService.deleteProduct(idProd);
     }
 }

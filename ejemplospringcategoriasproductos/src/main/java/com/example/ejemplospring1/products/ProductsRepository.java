@@ -1,4 +1,4 @@
-package com.example.ejemplospring1.categories;
+package com.example.ejemplospring1.products;
 
 import java.util.List;
 
