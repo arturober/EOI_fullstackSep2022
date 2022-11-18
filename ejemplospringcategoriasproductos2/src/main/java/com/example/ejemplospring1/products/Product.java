@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 
 import com.example.ejemplospring1.categories.Category;
-import com.example.ejemplospring1.categories.proyecciones.CategoryWithoutProducts;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +18,4 @@ public class Product {
     private double price;
     @Column("category")
     private int idCategory;
-
-    @Transient // No lo tiene en cuenta para las consultas a la base de datos
-    private CategoryWithoutProducts category;
 }

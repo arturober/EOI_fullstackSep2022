@@ -24,7 +24,6 @@ public class ProductsService {
         Product p = prodRepository.findById(idProd).orElseThrow(
             () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado") 
         );
-        p.setCategory(catRepository.findCategoryById(p.getIdCategory()));
         return p;
     }
 

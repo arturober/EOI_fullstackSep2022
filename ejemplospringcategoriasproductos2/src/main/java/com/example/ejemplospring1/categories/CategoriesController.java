@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ejemplospring1.categories.proyecciones.CategoryWithoutProducts;
 import com.example.ejemplospring1.products.Product;
 import com.example.ejemplospring1.products.ProductsService;
 
@@ -31,7 +30,7 @@ public class CategoriesController {
     private final ProductsService productsService;
 
     @GetMapping
-    public List<CategoryWithoutProducts> getCategories(@RequestParam(required = false) String name) {
+    public List<Category> getCategories(@RequestParam(required = false) String name) {
         if(name != null) {
             return catService.getCategoriesByName(name);
         } else {
@@ -41,7 +40,9 @@ public class CategoriesController {
 
     @GetMapping("/{id}")
     public Category getCategory(@PathVariable int id) {
-        return catService.getCategory(id);
+        Category c = catService.getCategory(id);
+        List<Product> prods = productsService.getProducts(id);
+        return new CategoryWithProducts(id, c.getName(), prods);
     }
 
     @PostMapping

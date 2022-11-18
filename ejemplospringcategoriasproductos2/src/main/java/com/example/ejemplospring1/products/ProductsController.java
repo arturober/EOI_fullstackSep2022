@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ejemplospring1.categories.CategoriesService;
+import com.example.ejemplospring1.categories.Category;
+
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -20,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductsController {
     private final ProductsService productsService;
+    private final CategoriesService catsService;
 
     @GetMapping
     public List<Product> getProducts(@RequestParam int category) {
@@ -27,8 +31,10 @@ public class ProductsController {
     }
 
     @GetMapping("/{id}")
-    public Product getProduct(@PathVariable int id) {
-        return productsService.getProduct(id);
+    public ProductWithCategory getProduct(@PathVariable int id) {
+        Product p = productsService.getProduct(id);
+        Category c = catsService.getCategory(id);
+        return new ProductWithCategory(p, c);
     }
 
     @PostMapping()
