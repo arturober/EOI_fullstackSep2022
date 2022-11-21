@@ -559,6 +559,266 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Equipos",
+			"item": [
+				{
+					"name": "Obtener todos los equipos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/equipos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener equipos buscando por nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/equipos?nombre=super",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipos"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "super"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener equipos de una ciudad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/equipos?ciudad=fantasma",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipos"
+							],
+							"query": [
+								{
+									"key": "ciudad",
+									"value": "fantasma"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener equipo por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/equipos/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Añadir equipo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Atlético Transparente\",\n    \"ciudad\": \"Fantasma\",\n    \"fechaCreacion\": \"2008-04-16\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/equipos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar equipo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/equipos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener jugadores de un equipo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jugadores?equipo=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jugadores"
+							],
+							"query": [
+								{
+									"key": "equipo",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener jugadores de una ciudad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jugadores?ciudad=fantasma",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jugadores"
+							],
+							"query": [
+								{
+									"key": "ciudad",
+									"value": "fantasma"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener jugador por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jugadores/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jugadores",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Añadir jugador",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Dionisio\",\n    \"numero\": 13,\n    \"sueldo\": 300000,\n    \"idEquipo\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jugadores",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jugadores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar jugador",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jugadores/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jugadores",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
