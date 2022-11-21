@@ -37,5 +37,7 @@ public class EquiposService {
         return jdbcTemplate.insert(e);
     }
 
-
+    public void delete(int id) {
+        equiposRepository.deleteById(id);
+    }
 }
