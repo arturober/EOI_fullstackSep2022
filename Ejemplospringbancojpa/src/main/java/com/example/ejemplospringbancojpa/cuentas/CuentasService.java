@@ -1,8 +1,7 @@
-package com.example.ejemplospringbanco.cuentas;
+package com.example.ejemplospringbancojpa.cuentas;
 
 import java.util.List;
 
-import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -12,10 +11,9 @@ import lombok.RequiredArgsConstructor;
 @Service @RequiredArgsConstructor
 public class CuentasService {
     private final CuentasRepository cuentasRepository;
-    private final JdbcAggregateTemplate jdbcTemplate;
 
     public List<Cuenta> getAll() {
-        return (List<Cuenta>)cuentasRepository.findAll();
+        return cuentasRepository.findAll();
     }
 
     public Cuenta getByNumero(int numero) {
@@ -27,7 +25,7 @@ public class CuentasService {
     public Cuenta insert(Cuenta cuenta) {
         // Usando jdbcTemplate podemos forzar un insert cuando la clave primaria
         // no es autogenerada (el método save haría un update)
-        return jdbcTemplate.insert(cuenta);
+        return cuentasRepository.save(cuenta);
     }
 
     public Cuenta update(Cuenta cuenta, int numero) {
@@ -35,7 +33,7 @@ public class CuentasService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cuenta no encontrada", null);
         }
         cuenta.setNumero(numero);
-        return jdbcTemplate.update(cuenta);
+        return cuentasRepository.save(cuenta);
     }
 
     public void delete(int numero) {

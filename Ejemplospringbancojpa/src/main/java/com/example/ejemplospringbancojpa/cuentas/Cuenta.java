@@ -1,12 +1,14 @@
-package com.example.ejemplospringbanco.cuentas;
+package com.example.ejemplospringbancojpa.cuentas;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// Spring Data JDBC
+// Spring Data JPA
+@Entity
 @Data @AllArgsConstructor @NoArgsConstructor
 public class Cuenta {
     @Id private int numero;
