@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.example.ejerciciospringequipos.equipos.Equipo;
+import com.example.ejerciciospringequipos.equipos.EquiposRepository;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class JugadoresService {
     private final JugadoresRepository jugadoresRepository;
+    private final EquiposRepository equiposRepository;
     private final JdbcAggregateTemplate jdbcTemplate;
 
     public List<Jugador> getByEquipo(int id) {
@@ -25,9 +29,11 @@ public class JugadoresService {
         return jugadoresRepository.findByCiudad(ciudad);
     }
 
-    public Jugador getById(int id) {
-        return jugadoresRepository.findById(id).orElseThrow(
+    public JugadorConEquipo getById(int id) {
+        Jugador j = jugadoresRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Jugador no encontrado"));
+        Equipo e = equiposRepository.findById(j.getIdEquipo()).get();
+        return new JugadorConEquipo(j, e);
     }
 
     public Jugador insert(Jugador jugador) {

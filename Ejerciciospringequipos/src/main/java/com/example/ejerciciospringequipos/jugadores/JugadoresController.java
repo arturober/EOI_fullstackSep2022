@@ -3,6 +3,7 @@ package com.example.ejerciciospringequipos.jugadores;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,28 +21,33 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/jugadores")
 @RequiredArgsConstructor
 public class JugadoresController {
-  private final JugadoresService jugadoresService;
+    private final JugadoresService jugadoresService;
 
-  @GetMapping
-  public List<Jugador> getEquipos(@RequestParam(required = false, defaultValue = "0") int equipo,
-      @RequestParam(required = false) String ciudad) {
-    if (equipo != 0) {
-      return jugadoresService.getByEquipo(equipo);
-    } else if (ciudad != null) {
-      return jugadoresService.getByCiudad(ciudad);
-    } else {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Debes proporcionar el equipo o la ciudad");
+    @GetMapping
+    public List<Jugador> getEquipos(@RequestParam(required = false, defaultValue = "0") int equipo,
+            @RequestParam(required = false) String ciudad) {
+        if (equipo != 0) {
+            return jugadoresService.getByEquipo(equipo);
+        } else if (ciudad != null) {
+            return jugadoresService.getByCiudad(ciudad);
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Debes proporcionar el equipo o la ciudad");
+        }
     }
-  }
 
-  @GetMapping("/{id}")
-  public Jugador getById(@PathVariable int id) {
-      return jugadoresService.getById(id);
-  }
+    @GetMapping("/{id}")
+    public JugadorConEquipo getById(@PathVariable int id) {
+        return jugadoresService.getById(id);
+    }
 
-  @PostMapping
-  public Jugador insert(@RequestBody Jugador jugador) {
-    return jugadoresService.insert(jugador);
-  }
+    @PostMapping
+    public Jugador insert(@RequestBody Jugador jugador) {
+        return jugadoresService.insert(jugador);
+    }
+
+    @DeleteMapping
+    public void delete(@PathVariable int id) {
+        jugadoresService.delete(id);
+    }
 
 }
