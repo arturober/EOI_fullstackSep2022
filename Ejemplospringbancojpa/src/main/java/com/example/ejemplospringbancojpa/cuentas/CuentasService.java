@@ -8,7 +8,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
 
-@Service @RequiredArgsConstructor
+@Service
+@RequiredArgsConstructor
 public class CuentasService {
     private final CuentasRepository cuentasRepository;
 
@@ -18,18 +19,18 @@ public class CuentasService {
 
     public Cuenta getByNumero(int numero) {
         return cuentasRepository.findById(numero).orElseThrow(
-            () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Categoria no encontrada")
-        );
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Categoria no encontrada"));
     }
 
     public Cuenta insert(Cuenta cuenta) {
-        // Usando jdbcTemplate podemos forzar un insert cuando la clave primaria
-        // no es autogenerada (el método save haría un update)
+        if (cuentasRepository.existsById(cuenta.getNumero())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La cuenta ya existe", null);
+        }
         return cuentasRepository.save(cuenta);
     }
 
     public Cuenta update(Cuenta cuenta, int numero) {
-        if(!cuentasRepository.existsById(numero)) {
+        if (!cuentasRepository.existsById(numero)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cuenta no encontrada", null);
         }
         cuenta.setNumero(numero);

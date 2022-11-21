@@ -1,5 +1,6 @@
 package com.example.ejemplospringbancojpa.cuentas;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor
 public class Cuenta {
     @Id private int numero;
+    @Column(nullable = false)
     private String cliente;
     private double saldo;
 }
