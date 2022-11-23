@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ejemplospring1.products.proyecciones.ProductWithCategory;
+import com.example.ejemplospring1.products.proyecciones.ProductWithoutCategory;
+
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -22,18 +25,18 @@ public class ProductsController {
     private final ProductsService productsService;
 
     @GetMapping
-    public List<Product> getProducts(@RequestParam int category) {
+    public List<ProductWithoutCategory> getProducts(@RequestParam int category) {
         return productsService.getProducts(category);
     }
 
     @GetMapping("/{id}")
-    public Product getProduct(@PathVariable int id) {
+    public ProductWithCategory getProduct(@PathVariable int id) {
         return productsService.getProduct(id);
     }
 
     @PostMapping()
     public Product insertProduct(@RequestBody Product p) {
-        return productsService.insertProduct(p);
+        return productsService.insertProduct(p, p.getCategory().getId());
     }
 
     @DeleteMapping("/{idProd}")

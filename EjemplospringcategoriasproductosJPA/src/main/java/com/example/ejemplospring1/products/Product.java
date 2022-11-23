@@ -5,6 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.example.ejemplospring1.categories.Category;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +25,8 @@ public class Product {
     @Column(nullable = false)
     private String name;
     private double price;
-    @Column(name = "category") // La columna tiene diferente nombre
-    private int idCategory;
+    
+    @ManyToOne
+    @JoinColumn(name="category") // Nombre de la columna con la clave ajena
+    private Category category;
 }

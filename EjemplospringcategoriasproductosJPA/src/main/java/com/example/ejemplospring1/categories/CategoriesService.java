@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.example.ejemplospring1.categories.proyecciones.CategoryWithProducts;
 import com.example.ejemplospring1.categories.proyecciones.CategoryWithoutProducts;
 
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,8 @@ public class CategoriesService {
         return catRepository.findByNameContaining(name);
     }
 
-    public Category getCategory(int id) {
-        return catRepository.findById(id).orElseThrow(
+    public CategoryWithProducts getCategory(int id) {
+        return catRepository.findCategoryById(id).orElseThrow(
             () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Categoria no encontrada")
         );
     }

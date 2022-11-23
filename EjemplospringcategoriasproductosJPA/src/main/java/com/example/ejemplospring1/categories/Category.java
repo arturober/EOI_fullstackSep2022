@@ -25,13 +25,7 @@ public class Category {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany
-    @JoinColumn(name="category") // Nombre de la columna con la clave ajena
+    @OneToMany(mappedBy = "category")
     private List<Product> products;
-
-    public void addProduct(Product p) {
-        p.setIdCategory(id);
-        products.add(p);
-    }
 }
 
