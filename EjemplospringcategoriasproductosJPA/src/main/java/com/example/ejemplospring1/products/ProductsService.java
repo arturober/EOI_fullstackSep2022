@@ -33,6 +33,7 @@ public class ProductsService {
         Category c = catRepository.findById(idCat).orElseThrow(
             () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Categoria no encontrada")
         );
+        c.setProducts(null);
         p.setCategory(c);
         return prodRepository.save(p);
     }
