@@ -14,17 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ejemplospringeventos.eventos.dto.AsistirEventoDto;
 import com.example.ejemplospringeventos.eventos.proyecciones.EventoConUsuarios;
 import com.example.ejemplospringeventos.eventos.proyecciones.EventoSinUsuarios;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@RestController 
+@RestController
 @RequestMapping("/eventos")
 public class EventosController {
     private final EventosService eventosService;
-    
+
     @GetMapping
     public List<EventoSinUsuarios> getAll() {
         return eventosService.getAll();
@@ -45,5 +46,11 @@ public class EventosController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
         eventosService.delete(id);
+    }
+
+    @PostMapping("/{idEvento}/asistir")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void asistirEvento(@PathVariable int idEvento, @RequestBody AsistirEventoDto asistirDto) {
+        eventosService.asistirEvento(idEvento, asistirDto.getUsuario());
     }
 }

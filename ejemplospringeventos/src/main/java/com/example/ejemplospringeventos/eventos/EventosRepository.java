@@ -12,4 +12,7 @@ import com.example.ejemplospringeventos.eventos.proyecciones.EventoSinUsuarios;
 public interface EventosRepository extends JpaRepository<Evento, Integer> {
     List<EventoSinUsuarios> findBy();
     EventoConUsuarios findEventoById(int id);
+
+    // @Query(value = "INSERT INTO usuario_asiste_evento VALUES (:usuario,:evento)", nativeQuery = true)
+    // void asistir(@Param("usuario") int idUsuario, @Param("evento") int idEvento);
 }
