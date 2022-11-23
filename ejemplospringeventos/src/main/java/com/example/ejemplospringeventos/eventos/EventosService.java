@@ -22,7 +22,7 @@ public class EventosService {
     public EventoConUsuarios getById(int id) {
         EventoConUsuarios e = eventosRepository.findEventoById(id);
         if(e == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Categoria no encontrada");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evento no encontrado");
         }
         return e;
     }
