@@ -53,4 +53,10 @@ public class EventosController {
     public void asistirEvento(@PathVariable int idEvento, @RequestBody AsistirEventoDto asistirDto) {
         eventosService.asistirEvento(idEvento, asistirDto.getUsuario());
     }
+
+    @DeleteMapping("/{idEvento}/asistir/{idUsuario}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void asistirEvento(@PathVariable int idEvento, @PathVariable int idUsuario) {
+        eventosService.dejarAsistirEvento(idEvento, idUsuario);
+    }
 }

@@ -49,4 +49,14 @@ public class EventosService {
         u.getEventos().add(e);
         eventosRepository.save(e);
     }
+
+    public void dejarAsistirEvento(int idEvento, int idUsuario) {
+        Evento e = eventosRepository.findById(idEvento)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Evento no encontrado"));
+        Usuario u = usuariosRepository.findById(idUsuario)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+        e.getUsuarios().remove(u);
+        u.getEventos().remove(e);
+        eventosRepository.save(e);
+    }
 }
