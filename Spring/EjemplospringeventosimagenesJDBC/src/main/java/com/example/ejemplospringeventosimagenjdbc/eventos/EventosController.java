@@ -1,6 +1,6 @@
-package com.example.ejemplospringeventos.eventos;
+package com.example.ejemplospringeventosimagenjdbc.eventos;
 
-import javax.validation.Valid;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,11 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ejemplospringeventos.eventos.dto.AsistirEventoDto;
-import com.example.ejemplospringeventos.eventos.dto.EventoInsertDto;
-import com.example.ejemplospringeventos.eventos.dto.RespuestaEventoDto;
-import com.example.ejemplospringeventos.eventos.dto.RespuestaEventosDto;
+import com.example.ejemplospringeventosimagenjdbc.eventos.dto.AsistirEventoDto;
+import com.example.ejemplospringeventosimagenjdbc.eventos.dto.EventoConUsuariosDto;
+import com.example.ejemplospringeventosimagenjdbc.eventos.dto.EventoInsertDto;
+import com.example.ejemplospringeventosimagenjdbc.eventos.dto.RespuestaEventoDto;
+import com.example.ejemplospringeventosimagenjdbc.eventos.dto.RespuestaEventosDto;
+import com.example.ejemplospringeventosimagenjdbc.usuarios.Usuario;
+import com.example.ejemplospringeventosimagenjdbc.usuarios.UsuariosService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -24,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/eventos")
 public class EventosController {
     private final EventosService eventosService;
+    private final UsuariosService usuariosService;
 
     @GetMapping
     public RespuestaEventosDto getAll() {
@@ -32,7 +37,10 @@ public class EventosController {
 
     @GetMapping("/{id}")
     public RespuestaEventoDto getById(@PathVariable int id) {
-        return new RespuestaEventoDto(eventosService.getById(id));
+        Evento e = eventosService.getById(id);
+        List<Usuario> asistentes = usuariosService.getAsistentesEvento(id);
+        EventoConUsuariosDto evDto = new EventoConUsuariosDto(e, asistentes);
+        return new RespuestaEventoDto(evDto);
     }
 
     @PostMapping
