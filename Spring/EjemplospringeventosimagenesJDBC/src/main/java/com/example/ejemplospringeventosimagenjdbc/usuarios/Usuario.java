@@ -2,6 +2,8 @@ package com.example.ejemplospringeventosimagenjdbc.usuarios;
 
 import org.springframework.data.annotation.Id;
 
+import com.example.ejemplospringeventosimagenjdbc.usuarios.dto.UsuarioInsertDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,4 +14,9 @@ public class Usuario {
     private int id;
     private String nombre;
     private String correo;
+
+    public Usuario(UsuarioInsertDto dto) {
+        this.nombre = dto.getNombre();
+        this.correo = dto.getCorreo();
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.ejemplospringeventosimagenjdbc.eventos;
 
+import java.util.List;
+
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -12,4 +14,7 @@ public interface EventosRepository extends CrudRepository<Evento, Integer> {
 
     @Query("DELETE FROM usuario_asiste_evento WHERE usuario = :usuario AND evento = :evento")
     void noAsistir(@Param("usuario") int idUsuario, @Param("evento") int idEvento);
+
+    @Query("SELECT e.* FROM evento e, usuario_asiste_evento uae WHERE e.id = uae.evento AND uae.usuario = :usuario")
+    List<Evento> getEventosUsuario(@Param("usuario") int idUsuario);
 }

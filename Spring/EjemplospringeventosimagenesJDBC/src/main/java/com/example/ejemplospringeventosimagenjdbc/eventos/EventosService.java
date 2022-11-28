@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.ejemplospringeventosimagenjdbc.usuarios.UsuariosRepository;
 import com.example.ejemplospringeventosimagenjdbc.utils.ImageUtils;
 
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EventosService {
     private final EventosRepository eventosRepository;
-    private final UsuariosRepository usuariosRepository;
     private final ImageUtils imageUtils;
 
     public List<Evento> getAll() {
@@ -44,5 +42,9 @@ public class EventosService {
 
     public void dejarAsistirEvento(int idEvento, int idUsuario) {
         eventosRepository.noAsistir(idUsuario, idEvento);
+    }
+
+    public List<Evento> eventosUsuario(int idUsuario) {
+        return eventosRepository.getEventosUsuario(idUsuario);
     }
 }
