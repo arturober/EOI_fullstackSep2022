@@ -1,6 +1,7 @@
 package com.example.ejemplospringeventos.usuarios;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -12,4 +13,6 @@ public interface UsuariosRepository extends CrudRepository<Usuario, Integer> {
     
     @Query("SELECT u.* FROM usuario u, usuario_asiste_evento uae WHERE u.id = uae.usuario AND uae.evento = :evento")
     List<Usuario> getAsistentesEvento(@Param("evento") int idEvento);
+
+    Optional<Usuario> findByCorreoAndPassword(String correo, String password);
 }

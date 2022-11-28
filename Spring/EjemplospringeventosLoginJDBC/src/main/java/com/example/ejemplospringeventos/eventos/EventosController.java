@@ -36,6 +36,13 @@ public class EventosController {
         return new RespuestaEventosDto(eventosService.getAll());
     }
 
+    @GetMapping("/asisto")
+    public RespuestaEventosDto getAsisto() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int idAuth = Integer.parseInt(auth.getCredentials().toString());
+        return new RespuestaEventosDto(eventosService.eventosUsuario(idAuth));
+    }
+
     @GetMapping("/{id}")
     public RespuestaEventoDto getById(@PathVariable int id) {
         Evento e = eventosService.getById(id);

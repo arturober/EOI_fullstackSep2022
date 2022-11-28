@@ -1,5 +1,6 @@
 package com.example.ejemplospringeventos.usuarios;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -43,7 +44,7 @@ public class UsuariosController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario insert(@RequestBody @Valid UsuarioInsertDto dto) {
+    public Usuario insert(@RequestBody @Valid UsuarioInsertDto dto)  throws NoSuchAlgorithmException {
         return usuariosService.insert(new Usuario(dto));
     }
 
