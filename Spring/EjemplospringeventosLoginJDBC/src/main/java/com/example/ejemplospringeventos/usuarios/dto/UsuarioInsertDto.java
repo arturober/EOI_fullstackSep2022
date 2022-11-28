@@ -1,5 +1,7 @@
 package com.example.ejemplospringeventos.usuarios.dto;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,4 +18,7 @@ public class UsuarioInsertDto {
     @NotNull(message = "El correo es obligatorio")
     @Email(message = "El correo no tiene un formato correcto")
     private String correo;
+    @NotNull(message = "La contraseña es obligatoria")
+    @Length(min = 4, message = "La contraseña debe tener al menos 4 caracteres")
+    private String password;
 }

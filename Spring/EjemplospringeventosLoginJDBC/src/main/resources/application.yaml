@@ -1,6 +1,6 @@
 spring:
     datasource:
-        url: jdbc:mariadb://localhost:3306/gestion_eventos
+        url: jdbc:mariadb://localhost:3306/gestion_eventos_login
         username: root
         password: 
         driver-class-name: org.mariadb.jdbc.Driver

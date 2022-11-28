@@ -20,5 +20,6 @@ public class Usuario {
     public Usuario(UsuarioInsertDto dto) {
         this.nombre = dto.getNombre();
         this.correo = dto.getCorreo();
+        this.password = dto.getPassword();
     }
 }

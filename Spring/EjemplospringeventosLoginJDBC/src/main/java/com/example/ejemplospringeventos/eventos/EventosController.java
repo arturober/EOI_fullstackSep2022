@@ -3,6 +3,8 @@ package com.example.ejemplospringeventos.eventos;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ejemplospringeventos.eventos.dto.AsistirEventoDto;
 import com.example.ejemplospringeventos.eventos.dto.EventoConUsuariosDto;
 import com.example.ejemplospringeventos.eventos.dto.EventoInsertDto;
 import com.example.ejemplospringeventos.eventos.dto.RespuestaEventoDto;
@@ -57,13 +58,17 @@ public class EventosController {
 
     @PostMapping("/{idEvento}/asistir")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void asistirEvento(@PathVariable int idEvento, @RequestBody @Valid AsistirEventoDto asistirDto) {
-        eventosService.asistirEvento(idEvento, asistirDto.getUsuario());
+    public void asistirEvento(@PathVariable int idEvento) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int idAuth = Integer.parseInt(auth.getCredentials().toString());
+        eventosService.asistirEvento(idEvento, idAuth);
     }
 
-    @DeleteMapping("/{idEvento}/asistir/{idUsuario}")
+    @DeleteMapping("/{idEvento}/asistir")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void asistirEvento(@PathVariable int idEvento, @PathVariable int idUsuario) {
-        eventosService.dejarAsistirEvento(idEvento, idUsuario);
+    public void dejarAsistirEvento(@PathVariable int idEvento) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int idAuth = Integer.parseInt(auth.getCredentials().toString());
+        eventosService.dejarAsistirEvento(idEvento, idAuth);
     }
 }
